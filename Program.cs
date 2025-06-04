@@ -1,4 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpLogging((o)=>{});
+
 var app = builder.Build();
 
 var blogs = new List<Blog>
@@ -7,7 +9,20 @@ var blogs = new List<Blog>
   new Blog { Title = "My Second Post", Body = "This is my second post"}
 };
 
+//app.UseRouting();
+//app.UseAuthentication();
+//app.UseAuthorization();
+//app.UseExceptionHandler();
+
+
+// app.UseHttpLogging();
+app.Use(async (context, next) => {
+  Console.WriteLine("Logic before");
+  await next.Invoke();
+  Console.WriteLine("Logic after");
+});
 app.MapGet("/", () => "I am root!");
+app.MapGet("/hello", () => "This is hello root!");
 
 app.MapGet("/blogs", () => {
   return blogs;
