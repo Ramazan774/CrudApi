@@ -19,8 +19,32 @@ app.MapGet("/blogs/{id}", (int id) =>{
   } else {
     return Results.Ok(blogs[id]);
   }
-  
 });
+
+app.MapPost("/blogs", (Blog blog) => {
+  blogs.Add(blog);
+  return Results.Created($"/blogs/{blogs.Count -1}", blog);
+});
+
+app.MapDelete("/blogs/{id}", (int id) => {
+  if (id < 0 || id >= blogs.Count) {
+    return Results.NotFound();
+  } else {
+    // var blog = blogs[id];
+    blogs.RemoveAt(id);
+    return Results.NoContent();
+  }
+});
+
+app.MapPut("/blogs/{id}", (int id, Blog blog) => {
+  if (id < 0 || id >= blogs.Count) {
+    return Results.NotFound();
+  } else {
+    blogs[id] = blog;
+    return Results.Ok(blog);
+  }
+});
+
 app.Run();
 
 public class Blog

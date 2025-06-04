@@ -5,3 +5,24 @@ GET http://localhost:5152/blogs
 
 ###
 GET http://localhost:5152/blogs/0
+
+###
+POST http://localhost:5152/blogs
+Content-Type: application/json
+
+{
+  "title": "My Third Post",
+  "body": "This is my third post"
+}
+
+###
+DELETE http://localhost:5152/blogs/1
+
+###
+PUT http://localhost:5152/blogs/1
+Content-Type: application/json
+
+{
+  "title": "My Third Posting",
+  "body": "This is my third posting"
+}
