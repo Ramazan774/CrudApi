@@ -1,0 +1,7 @@
+GET http://localhost:5152
+
+###
+GET http://localhost:5152/blogs
+
+###
+GET http://localhost:5152/blogs/0
